@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www & npm run scss",
+    "scss": "sass --watch public/stylesheets/scss/main.scss public/stylesheets/style.css"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
