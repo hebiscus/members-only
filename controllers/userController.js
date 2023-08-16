@@ -14,6 +14,10 @@ exports.signup = [
             console.log(err)
         }
     }).withMessage("you're already signed up"),
+    body("password").isLength({min: 5, max: 20}).withMessage("password has to be between 5 and 20 symbols"),
+    body("passwordConf").custom((value, { req }) => {
+        return value === req.body.password;
+      }).withMessage("passwords don't match!"),
     
     (req, res) => {
         console.log(body)
