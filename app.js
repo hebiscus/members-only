@@ -18,6 +18,7 @@ async function main() {
 
 const indexRouter = require('./routes/index');
 const signupRouter = require('./routes/sign-up');
+const joinclubRouter = require('./routes/join-club')
 const app = express();
 
 // view engine setup
@@ -33,9 +34,14 @@ app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/sign-up', signupRouter);
+app.use('/join-club', joinclubRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
