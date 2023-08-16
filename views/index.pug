@@ -2,4 +2,18 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p You've found yourself wondering through unfamiliar lands.
+  p You can views what others have written only if you know the secret passcode. No sniffers allowed.
+  div Links: 
+    a(href='/sign-up') Sign-Up
+    a(href='/join-club') Join Club
+    a(href='/messages') Messages
+  if !user
+    h1 please log in
+    form(action='' method="POST")
+      label(for="username") Username
+      input(name="username" placeholder="username" type="text") 
+      label(for="password") Password 
+      input(name="password" type="password")
+      button(type="submit") Log In
+    li= failLogin
