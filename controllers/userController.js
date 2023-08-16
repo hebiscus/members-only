@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const { body, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
 
 exports.signup = [
     body("firstName").isString().trim().exists({values: [null, "falsy"]}).withMessage("hey, first name is undefined!").isLength({min: 2, max: 20}).withMessage("between 2-20 letters"),
@@ -19,12 +20,37 @@ exports.signup = [
         return value === req.body.password;
       }).withMessage("passwords don't match!"),
     
-    (req, res) => {
+    (async (req, res, next) => {
         console.log(body)
         const errors = validationResult(req);
         if(!errors.isEmpty()) {
             return res.render("sign-up", { title: "Sign-Up", errors: errors.array() });
         }
-        res.redirect("/")
-    }
+        const salt =  bcrypt.genSaltSync(10);
+        const hashed = bcrypt.hashSync(req.body.password, salt);
+        console.log(hashed)
+        try {
+            const newUser = new User({firstName: req.body.firstName, lastName: req.body.lastName, username: req.body.username, password: hashed})
+            await newUser.save();
+            res.redirect("/");
+        } catch(err) {
+            return next(err);
+        }
+    })
 ];
+
+async (req, res, next) => {
+    const salt =  bcrypt.genSaltSync(10);
+    const hashed = bcrypt.hashSync(req.body.password, salt);
+    console.log(hashed)
+    try {
+        const user = new User({
+        username: req.body.username,
+        password: hashed,
+      });
+      await user.save();
+      res.redirect("/");
+    } catch(err) {
+      return next(err);
+    }
+  }
