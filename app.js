@@ -19,6 +19,7 @@ async function main() {
 const indexRouter = require('./routes/index');
 const signupRouter = require('./routes/sign-up');
 const joinclubRouter = require('./routes/join-club')
+const messagesRouter = require('./routes/messages')
 const app = express();
 
 // view engine setup
@@ -42,6 +43,7 @@ app.use(function(req, res, next) {
 app.use('/', indexRouter);
 app.use('/sign-up', signupRouter);
 app.use('/join-club', joinclubRouter);
+app.use('/messages', messagesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
