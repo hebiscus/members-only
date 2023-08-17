@@ -6,7 +6,6 @@ block content
   p You can views what others have written only if you know the secret passcode. No sniffers allowed.
   div Links: 
     a(href='/sign-up') Sign-Up
-    a(href='/join-club') Join Club
     a(href='/messages') Messages
   if !user
     h2 please log in
@@ -18,5 +17,6 @@ block content
       button(type="submit") Log In
     li= message
   else 
+    a(href='/join-club') Join Club
     h2 Nice to see you! 
     a(href='/messages/create') Create a new message!
