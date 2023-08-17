@@ -6,6 +6,6 @@ router.get("/", (req, res) => {
     res.render("join-club", {title: "Join us..."})
 });
 
-// router.post("/", userController.add_membership);
+router.post("/", userController.add_membership);
 
 module.exports = router;

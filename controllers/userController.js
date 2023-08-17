@@ -39,18 +39,19 @@ exports.signup = [
     })
 ];
 
-async (req, res, next) => {
-    const salt =  bcrypt.genSaltSync(10);
-    const hashed = bcrypt.hashSync(req.body.password, salt);
-    console.log(hashed)
+
+exports.add_membership = (async (req, res, next) => {
+    console.log("Current user:", req.user)
+    const secretPassword = "Rambo666";
+    const passedData = req.body.passcode;
+    if (passedData !== secretPassword) return res.render("join-club", {title: "You're unworthy", error: "that's not it..."});
+
+    const updatedUser = new User({membershipStatus: "member", _id: req.user._id})
+
     try {
-        const user = new User({
-        username: req.body.username,
-        password: hashed,
-      });
-      await user.save();
-      res.redirect("/");
+        const user = await User.findByIdAndUpdate(req.user._id, updatedUser);
+        res.redirect("/");
     } catch(err) {
-      return next(err);
+        return next(err);
     }
-  }
+})
