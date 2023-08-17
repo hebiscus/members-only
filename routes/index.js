@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 
 router.get('/', (req, res) => {
-  res.render('index', { title: 'Members Only', user: req.user, failLogin: req.session.message });
+  res.render('index', { title: 'Members Only', user: req.user, message: req.session.messages });
 });
 
 router.post('/', passport.authenticate("local", {

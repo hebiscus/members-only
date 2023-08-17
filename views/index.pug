@@ -9,11 +9,14 @@ block content
     a(href='/join-club') Join Club
     a(href='/messages') Messages
   if !user
-    h1 please log in
+    h2 please log in
     form(action='' method="POST")
       label(for="username") Username
       input(name="username" placeholder="username" type="text") 
       label(for="password") Password 
       input(name="password" type="password")
       button(type="submit") Log In
-    li= failLogin
+    li= message
+  else 
+    h2 Nice to see you! 
+    a(href='/messages/create') Create a new message!
