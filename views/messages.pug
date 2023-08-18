@@ -11,6 +11,8 @@ block content
                     h5=message.author.firstName + " " + message.author.lastName
                     p=message.content || "There's supposed to be a message here..."
                     p=`Created on: ${message.timestamp}`
+                    if user.membershipStatus == "admin"
+                        a(href=`messages/${message._id}/delete`) Delete
     else 
         div.messages-container
             each message in messages  

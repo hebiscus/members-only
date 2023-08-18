@@ -27,3 +27,12 @@ exports.create = [
             return next(err)
         }
 })]
+
+exports.delete = async (req, res, next) => {
+    try {
+        await Message.findByIdAndDelete(req.params.id);
+        res.redirect("/messages");
+    } catch(err) {
+        return next(err)
+    }
+};
