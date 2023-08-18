@@ -1,6 +1,20 @@
 extends layout
 
 block content 
-    h1= title
+    h1 Messages
     if user 
         a(href='/messages/create') Create a message!
+        div.messages-container   
+            each message in messages
+                div.message-container    
+                    h3=message.title 
+                    h5=message.author.firstName + " " + message.author.lastName
+                    p=message.content || "There's supposed to be a message here..."
+                    p=`Created on: ${message.timestamp}`
+    else 
+        div.messages-container
+            each message in messages  
+                div.message-container     
+                    h3=message.title 
+                    p=message.content
+                    p Become a member to see who posted that!

@@ -2,6 +2,15 @@ const User = require('../models/user');
 const Message = require('../models/message');
 const { body, validationResult } = require("express-validator");
 
+exports.list = async (req, res, next) => {
+    try {
+        const messages = await Message.find().populate("author").sort({timestamp: 1});
+        res.render("messages", {user: req.user, messages: messages});
+    } catch(err) {
+        return next(err)
+    }
+}
+
 exports.create = [
     body("title").trim().isString().withMessage("has to be a string!").isLength({min: 1, max: 20}).withMessage("title has to be at least 1 character long"),
 
