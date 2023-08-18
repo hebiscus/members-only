@@ -40,18 +40,32 @@ exports.signup = [
 ];
 
 
-exports.add_membership = (async (req, res, next) => {
-    console.log("Current user:", req.user)
+exports.add_membership = async (req, res, next) => {
     const secretPassword = "Rambo666";
     const passedData = req.body.passcode;
     if (passedData !== secretPassword) return res.render("join-club", {title: "You're unworthy", error: "that's not it..."});
 
-    const updatedUser = new User({membershipStatus: "member", _id: req.user._id})
+    const updatedUser = new User({membershipStatus: "member", _id: req.user._id});
 
     try {
-        const user = await User.findByIdAndUpdate(req.user._id, updatedUser);
+        await User.findByIdAndUpdate(req.user._id, updatedUser);
         res.redirect("/");
     } catch(err) {
         return next(err);
     }
-})
+};
+
+exports.upgrade_to_admin = async (req, res, next) => {
+    const adminPassword = "Dandelion03";
+    const passedData = req.body.passcodeAdmin;
+    if (passedData !== adminPassword) return res.render("join-club", {title: "How DARE you?!", errorAdmin: "that's not it..."});
+
+    const updatedUser = new User({membershipStatus: "admin", _id: req.user._id});
+
+    try {
+        await User.findByIdAndUpdate(req.user._id, updatedUser);
+        res.redirect("/");
+    } catch(err) {
+        return next(err);
+    }
+}

@@ -4,8 +4,15 @@ block content
     h1= title 
     div     
         h2 Enter special passcode to become a member! 
-        form(method='POST', action='')
+        form(method='POST', action='/join-club/upgrade-member')
             label(for='passcode') Passcode:
             input(type='text' name='passcode')
             button(type='submit') Submit
         p= error
+    div 
+        h2 Or maybe an admin? 
+        form(method='POST', action='/join-club/upgrade-admin')
+            label(for='passcodeAdmin') Passcode:
+            input(type='text' name='passcodeAdmin')
+            button(type='submit') Submit
+        p= errorAdmin
