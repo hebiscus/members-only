@@ -1,9 +1,9 @@
 * {
     box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
 }
 
 body {
-    margin: 0;
     padding: 0;
 }
 
@@ -19,4 +19,12 @@ body {
     max-width: 500px;
     border: 1px solid black;
 } 
+
+.login-form {
+    margin-top: 1rem;
+}
+
+.logged-box {
+    margin-top: 1rem;
+}
 
