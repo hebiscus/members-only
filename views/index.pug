@@ -4,19 +4,22 @@ block content
   h1= title
   p You've found yourself wondering through unfamiliar lands.
   p You can views what others have written only if you know the secret passcode. No sniffers allowed.
-  div Links: 
-    a(href='/sign-up') Sign-Up
-    a(href='/messages') Messages
+  a(href='/messages') Messages
   if !user
-    h2 please log in
-    form(action='' method="POST")
+    h2 please log in or sign-up 
+    a(href='/sign-up') Sign-Up
+    form.login-form(action='' method="POST")
       label(for="username") Username
       input(name="username" placeholder="username" type="text") 
       label(for="password") Password 
       input(name="password" type="password")
       button(type="submit") Log In
-    li= message
+    if messages
+      - const lastErrorMessage = messages[messages.length - 1]
+      li=  messages[messages.length - 1]
+    else  
   else 
-    a(href='/join-club') Join Club
-    h2 Nice to see you! 
-    a(href='/messages/create') Create a new message!
+    div.logged-box
+      a(href='/join-club') Join Club
+      h2 Nice to see you! 
+      a(href='/messages/create') Create a new message!

@@ -7,9 +7,9 @@ block content
         div.messages-container   
             each message in messages
                 div.message-container    
-                    h3=message.title 
-                    h5=message.author.firstName + " " + message.author.lastName
-                    p=message.content || "There's supposed to be a message here..."
+                    h3= message.title
+                    h5= `By:` + " " + message.author.firstName + " " + message.author.lastName
+                    p= message.content || "There's supposed to be a message here..."
                     p=`Created on: ${message.timestamp}`
                     if user.membershipStatus == "admin"
                         a(href=`messages/${message._id}/delete`) Delete
