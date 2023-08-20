@@ -8,10 +8,10 @@ require('dotenv').config();
 require('./config/passportConf');
 const passport = require('passport')
 const mongoose = require('mongoose');
-const mongoDB = process.env.MONGODB_URI
+// const mongoDB = process.env.MONGODB_URI
 
 async function main() {
-  await mongoose.connect(mongoDB)
+  await mongoose.connect(process.env.MONGODB_URI)
   console.log("ayo it works")
 }
 main().catch(err => console.log(err));
