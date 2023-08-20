@@ -2,6 +2,7 @@ extends layout
 
 block content
     h1= title
+    a(href="/") Go back to homepage
     form.signUpForm(method='POST' action='')
         label(for='firstName') first Name:
         input(name='firstName' type='text')

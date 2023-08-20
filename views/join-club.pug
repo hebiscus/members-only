@@ -2,6 +2,7 @@ extends layout
 
 block content 
     h1= title 
+    a(href="/") Go back to homepage
     div     
         h2 Enter special passcode to become a member! 
         form(method='POST', action='/join-club/upgrade-member')

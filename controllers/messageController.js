@@ -11,7 +11,7 @@ exports.list = async (req, res, next) => {
 }
 
 exports.create = [
-    body("title").trim().isString().withMessage("has to be a string!").isLength({min: 1, max: 20}).withMessage("title has to be at least 1 character long"),
+    body("title").trim().isString().withMessage("has to be a string!").isLength({min: 1, max: 30}).withMessage("title has to be between 1-30 character long"),
 
     (async (req, res, next) => {
         const errors = validationResult(req);

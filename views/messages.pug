@@ -2,6 +2,7 @@ extends layout
 
 block content 
     h1 Messages
+    a(href="/" style="margin-inline: 1rem") Go back to homepage
     if user 
         a(href='/messages/create') Create a message!
         div.messages-container   
